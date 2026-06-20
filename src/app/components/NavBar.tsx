@@ -1,34 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from './ui/button';
+import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 export default function NavBar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const navLinks = [
-    { name: 'Products', href: '#products' },
-    { name: 'Manufacturing', href: '#manufacturing' },
-    { name: 'Quality', href: '#quality' },
-    { name: 'Industries', href: '#industries' },
+    { name: 'Home', href: '#' },
+    { name: 'About Us', href: '#why-copper' },
+    { name: 'Our Product', href: '#products' },
     { name: 'Contact', href: '#contact' },
+    { name: 'Work With Us', href: '#contact' },
+    { name: 'Careers', href: '#contact' },
   ];
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
+    if (href === '#') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     const targetElement = document.querySelector(href);
     if (targetElement) {
       targetElement.scrollIntoView({ behavior: 'smooth' });
@@ -37,82 +28,123 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-navy-deep/95 backdrop-blur-md border-b border-white/10 shadow-lg py-4'
-          : 'bg-transparent py-6'
-      }`}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 50,
+        background: 'rgba(0, 0, 0, 0.45)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+        borderBottom: '1px solid rgba(184, 115, 51, 0.25)',
+        boxShadow: '0 4px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08)',
+      }}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between">
-        {/* Brand Logo & Tagline */}
-        <a href="#" className="flex flex-col group">
-          <span className="font-display text-2xl md:text-3xl font-extrabold tracking-wider text-white transition-colors group-hover:text-copper">
-            SMCL
-          </span>
-          <span className="text-[10px] text-white/60 tracking-widest uppercase font-sans mt-0.5 group-hover:text-white transition-colors duration-300">
-            Copper CCR Rods | Wire | Bus Bars
-          </span>
+      <div
+        style={{
+          maxWidth: '1280px',
+          margin: '0 auto',
+          padding: '0 2rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          height: '88px',
+        }}
+      >
+        {/* Logo — fills full nav height */}
+        <a
+          href="#"
+          onClick={(e) => handleLinkClick(e, '#')}
+          style={{ display: 'flex', alignItems: 'center', height: '88px', overflow: 'hidden' }}
+        >
+          <img
+            src="/smcl-logo.png"
+            alt="SMCL - Shree Mahalakshmi CCR Limited"
+            style={{ height: '108px', width: 'auto', objectFit: 'contain', display: 'block', marginTop: '-30px' }}
+          />
         </a>
 
-        {/* Desktop Nav Links */}
-        <div className="hidden md:flex items-center gap-8">
+        {/* Desktop Nav Links — centered with small gap */}
+        <div
+          className="hidden md:flex"
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '2.8rem',
+          }}
+        >
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={(e) => handleLinkClick(e, link.href)}
-              className="text-sm font-medium text-white/80 hover:text-copper transition-colors duration-200 uppercase tracking-wider text-[12px]"
+              style={{
+                color: '#b87333',
+                fontSize: '13px',
+                fontWeight: 600,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+                transition: 'color 0.2s',
+                padding: '4px 0',
+                position: 'relative',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#e8a060')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#b87333')}
             >
               {link.name}
             </a>
           ))}
         </div>
 
-        {/* Desktop CTA */}
-        <div className="hidden md:block">
-          <Button
-            asChild
-            className="rounded-none border border-copper bg-transparent text-copper hover:bg-copper hover:text-white transition-all duration-300 font-sans uppercase tracking-wider text-xs px-5 py-2 h-auto"
-          >
-            <a href="#contact">Request Quote</a>
-          </Button>
-        </div>
-
-        {/* Mobile Hamburger Toggle */}
+        {/* Mobile Hamburger */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden text-white hover:text-copper transition-colors focus:outline-none"
+          className="md:hidden focus:outline-none"
+          style={{ color: '#b87333' }}
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer */}
       <div
-        className={`md:hidden absolute top-full left-0 right-0 bg-navy-deep border-b border-white/10 transition-all duration-300 overflow-hidden ${
-          isMobileMenuOpen ? 'max-h-[350px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
-        }`}
+        className="md:hidden"
+        style={{
+          background: 'rgba(0, 0, 0, 0.75)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderTop: '1px solid rgba(184, 115, 51, 0.2)',
+          overflow: 'hidden',
+          maxHeight: isMobileMenuOpen ? '400px' : '0px',
+          opacity: isMobileMenuOpen ? 1 : 0,
+          pointerEvents: isMobileMenuOpen ? 'auto' : 'none',
+          transition: 'max-height 0.3s ease, opacity 0.3s ease',
+        }}
       >
-        <div className="flex flex-col px-6 py-4 gap-4">
+        <div style={{ display: 'flex', flexDirection: 'column', padding: '1rem 1.5rem', gap: '0' }}>
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={(e) => handleLinkClick(e, link.href)}
-              className="text-sm font-medium text-white/80 hover:text-copper transition-colors duration-200 uppercase tracking-wider py-2 border-b border-white/5"
+              style={{
+                color: '#b87333',
+                fontSize: '13px',
+                fontWeight: 600,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+                padding: '12px 0',
+                borderBottom: '1px solid rgba(255,255,255,0.08)',
+              }}
             >
               {link.name}
             </a>
           ))}
-          <Button
-            asChild
-            className="rounded-none border border-copper bg-transparent text-copper hover:bg-copper hover:text-white transition-all duration-300 font-sans uppercase tracking-wider text-xs py-2.5 w-full mt-2"
-          >
-            <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
-              Request Quote
-            </a>
-          </Button>
         </div>
       </div>
     </nav>
