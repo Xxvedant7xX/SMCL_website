@@ -81,7 +81,7 @@ export default function NavBar() {
               href={link.href}
               onClick={(e) => handleLinkClick(e, link.href)}
               style={{
-                color: '#b87333',
+                color: '#e8a060',
                 fontSize: '13px',
                 fontWeight: 600,
                 letterSpacing: '0.08em',
@@ -92,7 +92,7 @@ export default function NavBar() {
                 position: 'relative',
               }}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#e8a060')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#b87333')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#e8a060')}
             >
               {link.name}
             </a>
@@ -103,11 +103,43 @@ export default function NavBar() {
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="md:hidden focus:outline-none"
-          style={{ color: '#b87333' }}
+          style={{ color: '#e8a060' }}
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
+      </div>
+
+      {/* Contact Info — pinned to far right, desktop only */}
+      <div
+        className="hidden md:flex"
+        style={{
+          position: 'absolute',
+          right: '2rem',
+          top: '0',
+          height: '88px',
+          flexDirection: 'column',
+          alignItems: 'flex-end',
+          justifyContent: 'center',
+          gap: '3px',
+        }}
+      >
+        <a
+          href="mailto:enquires.smcl@gmail.com"
+          style={{ color: '#e8a060', fontSize: '12px', fontWeight: 600, textDecoration: 'none', letterSpacing: '0.04em' }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = '#e8a060')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = '#e8a060')}
+        >
+          enquires.smcl@gmail.com
+        </a>
+        <a
+          href="tel:+919425123165"
+          style={{ color: '#e8a060', fontSize: '12px', fontWeight: 600, textDecoration: 'none', letterSpacing: '0.04em' }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = '#e8a060')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = '#e8a060')}
+        >
+          +91-9425123165
+        </a>
       </div>
 
       {/* Mobile Drawer */}
@@ -132,7 +164,7 @@ export default function NavBar() {
               href={link.href}
               onClick={(e) => handleLinkClick(e, link.href)}
               style={{
-                color: '#b87333',
+                color: '#e8a060',
                 fontSize: '13px',
                 fontWeight: 600,
                 letterSpacing: '0.08em',
