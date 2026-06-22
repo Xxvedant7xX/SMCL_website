@@ -117,13 +117,13 @@ export default function InquirySection() {
               </p>
             </div>
             <div className="flex flex-col gap-2.5 text-xs font-semibold uppercase tracking-wider">
-              <a href="tel:+911245559800" className="flex items-center gap-2 hover:text-copper transition-colors">
+              <a href="tel:+919425123165" className="flex items-center gap-2 hover:text-copper transition-colors">
                 <Phone size={14} className="text-copper shrink-0" />
-                +91 124 555 9800
+                +91-9425123165
               </a>
-              <a href="mailto:sales@smclcopper.com" className="flex items-center gap-2 hover:text-copper transition-colors">
+              <a href="mailto:enquires.smcl@gmail.com" className="flex items-center gap-2 hover:text-copper transition-colors">
                 <Mail size={14} className="text-copper shrink-0" />
-                sales@smclcopper.com
+                enquires.smcl@gmail.com
               </a>
             </div>
           </div>
@@ -141,15 +141,15 @@ export default function InquirySection() {
                 <li className="flex gap-3">
                   <MapPin size={18} className="text-copper shrink-0 mt-1" />
                   <div>
-                    <span className="text-white block font-medium">Shree Mahalakshmi CCR Ltd.</span>
-                    12th Floor, Industrial Growth Plaza, Sector 4, Gurugram, Haryana - 122001, India.
+                    <span className="text-white block font-medium">Shree Mahalakshmi CCR Limited</span>
+                    34-35-36 (Part), Pithampur Industrial Area, Sector 3, Dhar, Madhya Pradesh - 454774, India.
                   </div>
                 </li>
                 <li className="flex gap-3">
                   <MapPin size={18} className="text-copper shrink-0 mt-1" />
                   <div>
-                    <span className="text-white block font-medium">Manufacturing Unit I</span>
-                    Plot No. 45-48, Industrial Area Phase II, Alwar, Rajasthan - 301001, India.
+                    <span className="text-white block font-medium">Manufacturing Unit</span>
+                    34-35-36 (Part), Pithampur Industrial Area, Sector 3, Dhar, Madhya Pradesh - 454774, India.
                   </div>
                 </li>
               </ul>
@@ -160,11 +160,11 @@ export default function InquirySection() {
               <ul className="flex flex-col gap-4 text-sm text-white/60">
                 <li className="flex items-center gap-3">
                   <Phone size={16} className="text-copper shrink-0" />
-                  General Lines: +91 124 555 9801
+                  <a href="tel:+919425123165" className="hover:text-copper transition-colors">+91-9425123165</a>
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail size={16} className="text-copper shrink-0" />
-                  General Queries: info@smclcopper.com
+                  <a href="mailto:enquires.smcl@gmail.com" className="hover:text-copper transition-colors">enquires.smcl@gmail.com</a>
                 </li>
               </ul>
             </div>

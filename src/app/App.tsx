@@ -1,22 +1,29 @@
 import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router';
 import NavBar from './components/NavBar';
-import HeroSection from './components/HeroSection';
-import WhyCopperSection from './components/WhyCopperSection';
-import ManufacturingSection from './components/ManufacturingSection';
-import ProductsSection from './components/ProductsSection';
-import IndustriesSection from './components/IndustriesSection';
-import QualitySection from './components/QualitySection';
-import CapacitySection from './components/CapacitySection';
-import InquirySection from './components/InquirySection';
 import Footer from './components/Footer';
 import { Toaster } from 'sonner';
 
-export default function App() {
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ProductsPage from './pages/ProductsPage';
+import ContactPage from './pages/ContactPage';
+import WorkWithUsPage from './pages/WorkWithUsPage';
+import CareersPage from './pages/CareersPage';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
+
+function ScrollReveal() {
+  const { pathname } = useLocation();
   useEffect(() => {
     const selectors = [
       'section h1', 'section h2', 'section h3',
       'section p', 'section li',
-      'section [class*="card"]', 'section [class*="grid"] > div',
+      'section [class*="grid"] > div',
       'section [class*="flex"] > div', 'section img',
       'section button', 'section a[href]',
     ].join(',');
@@ -27,6 +34,7 @@ export default function App() {
 
     els.forEach((el) => {
       if (el.closest('nav') || el.closest('.no-sr') || el.closest('section:first-of-type')) return;
+      el.classList.remove('sr', 'sr-visible', 'sr-delay-1', 'sr-delay-2', 'sr-delay-3', 'sr-delay-4');
       el.classList.add('sr');
       if (el.parentElement !== lastParent) { delay = 0; lastParent = el.parentElement; }
       if (delay > 0) el.classList.add(`sr-delay-${Math.min(delay, 4)}`);
@@ -34,50 +42,46 @@ export default function App() {
     });
 
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) { (e.target as HTMLElement).classList.add('sr-visible'); observer.unobserve(e.target); } }),
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) {
+          (e.target as HTMLElement).classList.add('sr-visible');
+          observer.unobserve(e.target);
+        }
+      }),
       { threshold: 0.12 }
     );
     els.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
+  return null;
+}
 
+function Layout() {
   return (
-    <div className="min-h-screen bg-navy-deep text-white font-sans scroll-smooth">
-      {/* Toast Notification Container */}
+    <div className="min-h-screen bg-navy-deep text-white font-sans">
       <Toaster position="top-right" richColors closeButton theme="dark" />
-
-      {/* Header Sticky Navigation */}
       <NavBar />
-
-      {/* Main Core Layout Sections */}
+      <ScrollToTop />
+      <ScrollReveal />
       <main className="relative flex flex-col w-full">
-        {/* 1. Hero Landing Section */}
-        <HeroSection />
-
-        {/* 2. Why Copper Matters Section */}
-        <WhyCopperSection />
-
-        {/* 3. Manufacturing Excellence Timeline Section */}
-        <ManufacturingSection />
-
-        {/* 4. Products Specification Portfolio Section */}
-        <ProductsSection />
-
-        {/* 5. Industries Covered Grid Section */}
-        <IndustriesSection />
-
-        {/* 6. Quality & Testing Certification Section */}
-        <QualitySection />
-
-        {/* 7. Facility Capacity & Scale Section */}
-        <CapacitySection />
-
-        {/* 8. Inquiry Contract Contact Form Section */}
-        <InquirySection />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/work-with-us" element={<WorkWithUsPage />} />
+          <Route path="/careers" element={<CareersPage />} />
+        </Routes>
       </main>
-
-      {/* Footer Navigation & Badges */}
       <Footer />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
   );
 }

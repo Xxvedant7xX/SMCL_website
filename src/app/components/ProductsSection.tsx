@@ -14,19 +14,19 @@ import { Check, ClipboardList, Download, ArrowRight } from 'lucide-react';
 export default function ProductsSection() {
   const products = [
     {
-      id: 'ccr-rods',
-      name: 'Copper CCR Rods',
-      tagline: 'Continuous Cast Coils for Drawing & Extrusion',
+      id: 'ccr-rod-12mm',
+      name: 'Copper Rod 12mm',
+      tagline: 'Continuous Cast CCR Rod — 12mm Diameter',
       image: 'https://images.unsplash.com/photo-1615840287214-7fe58a8b668f?auto=format&fit=crop&w=800&q=80',
       specs: [
-        { label: 'Electrolytic Purity', value: '99.97% Minimum' },
-        { label: 'Standard Diameter', value: '8.0 mm / 12.0 mm / 16.0 mm' },
+        { label: 'Diameter', value: '12.0 mm' },
+        { label: 'Electrolytic Purity', value: '99.90% Minimum' },
         { label: 'Electrical Conductivity', value: '101% IACS Minimum' },
         { label: 'Governing Standards', value: 'ASTM B49 / BS EN 1977' },
       ],
       detailedSpecs: {
         chemicalComposition: [
-          { element: 'Copper (Cu)', percentage: '99.97% Min' },
+          { element: 'Copper (Cu)', percentage: '99.90% Min' },
           { element: 'Oxygen (O2)', percentage: '150 - 400 ppm' },
           { element: 'Lead (Pb)', percentage: '< 5 ppm' },
           { element: 'Bismuth (Bi)', percentage: '< 1 ppm' },
@@ -39,51 +39,52 @@ export default function ProductsSection() {
       },
     },
     {
-      id: 'copper-wires',
-      name: 'Copper Wires',
-      tagline: 'Multi-Wire Drawing & Annealed Power Conductors',
+      id: 'ccr-rod-8mm',
+      name: 'Copper Rod 8mm',
+      tagline: 'Continuous Cast CCR Rod — 8mm Diameter',
+      image: 'https://images.unsplash.com/photo-1615840287214-7fe58a8b668f?auto=format&fit=crop&w=800&q=80',
+      specs: [
+        { label: 'Diameter', value: '8.0 mm' },
+        { label: 'Electrolytic Purity', value: '99.90% Minimum' },
+        { label: 'Electrical Conductivity', value: '101% IACS Minimum' },
+        { label: 'Governing Standards', value: 'ASTM B49 / BS EN 1977' },
+      ],
+      detailedSpecs: {
+        chemicalComposition: [
+          { element: 'Copper (Cu)', percentage: '99.90% Min' },
+          { element: 'Oxygen (O2)', percentage: '150 - 400 ppm' },
+          { element: 'Lead (Pb)', percentage: '< 5 ppm' },
+          { element: 'Bismuth (Bi)', percentage: '< 1 ppm' },
+        ],
+        mechanicalProperties: [
+          { property: 'Tensile Strength', specification: '220 - 250 MPa' },
+          { property: 'Elongation at Break', specification: '35% Minimum' },
+          { property: 'Torsion Test', specification: '40 twists Min before fail' },
+        ],
+      },
+    },
+    {
+      id: 'copper-wire-1.6mm',
+      name: 'Copper Wire 1.6mm',
+      tagline: 'Drawn Copper Wire — 1.6mm Diameter',
       image: 'https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?auto=format&fit=crop&w=800&q=80',
       specs: [
-        { label: 'Electrolytic Purity', value: '99.95% Minimum' },
-        { label: 'Wire Sizes Range', value: '0.15 mm to 3.2 mm' },
-        { label: 'Elongation Value', value: '25% - 35% depending on size' },
+        { label: 'Diameter', value: '1.6 mm' },
+        { label: 'Electrolytic Purity', value: '99.90% Minimum' },
+        { label: 'Elongation Value', value: '25% - 35%' },
         { label: 'Governing Standards', value: 'IS 8130 / IEC 60228' },
       ],
       detailedSpecs: {
         chemicalComposition: [
-          { element: 'Copper (Cu)', percentage: '99.95% Min' },
+          { element: 'Copper (Cu)', percentage: '99.90% Min' },
           { element: 'Oxygen (O2)', percentage: '100 - 300 ppm' },
           { element: 'Lead (Pb)', percentage: '< 10 ppm' },
           { element: 'Iron (Fe)', percentage: '< 8 ppm' },
         ],
         mechanicalProperties: [
-          { property: 'Ductility Class', specification: 'Class 1 (Solid) & Class 2 (Stranded)' },
-          { property: 'Surface finish', specification: 'Polished, bright annealed, oxidation-free' },
+          { property: 'Ductility Class', specification: 'Class 1 (Solid)' },
+          { property: 'Surface Finish', specification: 'Bright annealed, oxidation-free' },
           { property: 'Resistivity at 20°C', specification: '0.01724 Ω·mm²/m Maximum' },
-        ],
-      },
-    },
-    {
-      id: 'bus-bars',
-      name: 'Copper Bus Bars',
-      tagline: 'High-Conductivity Flat Strips & Solid Sections',
-      image: 'https://images.unsplash.com/photo-1618578521310-229b4ef4cad0?auto=format&fit=crop&w=800&q=80',
-      specs: [
-        { label: 'Electrolytic Purity', value: '99.95% Minimum' },
-        { label: 'Thickness / Width', value: '3.0 - 15.0 mm / up to 250 mm' },
-        { label: 'Thermal Conductivity', value: '394 W/m·K at 20°C' },
-        { label: 'Governing Standards', value: 'IS 1897 / DIN 1787' },
-      ],
-      detailedSpecs: {
-        chemicalComposition: [
-          { element: 'Copper (Cu)', percentage: '99.95% Min' },
-          { element: 'Oxygen (O2)', percentage: 'Deoxidized (Low O2)' },
-          { element: 'Total Impurities', percentage: 'Max 0.05%' },
-        ],
-        mechanicalProperties: [
-          { property: 'Hardness Range', specification: 'HB 65 (Half Hard) / HB 85 (Hard)' },
-          { property: 'Edge Finishing', specification: 'Full Rounded (RD), Radius (R), Sharp (SE)' },
-          { property: 'Yield Strength', specification: '150 - 220 MPa' },
         ],
       },
     },
@@ -255,6 +256,14 @@ export default function ProductsSection() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Custom Wire Drawing Note */}
+        <div className="mt-12 border-l-4 border-copper bg-white/60 p-6 flex flex-col gap-1 shadow-sm">
+          <span className="text-xs font-bold uppercase tracking-widest text-copper">Custom Wire Drawing — Made to Order</span>
+          <p className="text-sm text-navy-deep/70 leading-relaxed mt-1">
+            As per your requirement, we also draw wire between <strong className="text-navy-deep">8mm to 1.6mm</strong> in any intermediate diameter. All custom sizes are manufactured to order — contact us with your specifications.
+          </p>
         </div>
 
       </div>

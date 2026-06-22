@@ -1,30 +1,18 @@
 import React, { useState } from 'react';
+import { Link, NavLink } from 'react-router';
 import { Menu, X } from 'lucide-react';
 
 export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Home', href: '#' },
-    { name: 'About Us', href: '#why-copper' },
-    { name: 'Our Product', href: '#products' },
-    { name: 'Contact', href: '#contact' },
-    { name: 'Work With Us', href: '#contact' },
-    { name: 'Careers', href: '#contact' },
+    { name: 'Home', to: '/' },
+    { name: 'About Us', to: '/about' },
+    { name: 'Our Product', to: '/products' },
+    { name: 'Contact', to: '/contact' },
+    { name: 'Work With Us', to: '/work-with-us' },
+    { name: 'Careers', to: '/careers' },
   ];
-
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    setIsMobileMenuOpen(false);
-    if (href === '#') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-    const targetElement = document.querySelector(href);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <nav
@@ -53,9 +41,8 @@ export default function NavBar() {
         }}
       >
         {/* Logo — fills full nav height */}
-        <a
-          href="#"
-          onClick={(e) => handleLinkClick(e, '#')}
+        <Link
+          to="/"
           style={{ display: 'flex', alignItems: 'center', height: '88px', overflow: 'hidden' }}
         >
           <img
@@ -63,7 +50,7 @@ export default function NavBar() {
             alt="SMCL - Shree Mahalakshmi CCR Limited"
             style={{ height: '108px', width: 'auto', objectFit: 'contain', display: 'block', marginTop: '-30px' }}
           />
-        </a>
+        </Link>
 
         {/* Desktop Nav Links — centered with small gap */}
         <div
@@ -76,12 +63,12 @@ export default function NavBar() {
           }}
         >
           {navLinks.map((link) => (
-            <a
+            <NavLink
               key={link.name}
-              href={link.href}
-              onClick={(e) => handleLinkClick(e, link.href)}
-              style={{
-                color: '#e8a060',
+              to={link.to}
+              onClick={() => setIsMobileMenuOpen(false)}
+              style={({ isActive }) => ({
+                color: isActive ? '#ffffff' : '#e8a060',
                 fontSize: '13px',
                 fontWeight: 600,
                 letterSpacing: '0.08em',
@@ -89,13 +76,16 @@ export default function NavBar() {
                 textDecoration: 'none',
                 transition: 'color 0.2s',
                 padding: '4px 0',
-                position: 'relative',
+                borderBottom: isActive ? '2px solid #e8a060' : '2px solid transparent',
+              })}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+              onMouseLeave={(e) => {
+                const active = e.currentTarget.getAttribute('aria-current') === 'page';
+                e.currentTarget.style.color = active ? '#ffffff' : '#e8a060';
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#e8a060')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#e8a060')}
             >
               {link.name}
-            </a>
+            </NavLink>
           ))}
         </div>
 
@@ -159,23 +149,14 @@ export default function NavBar() {
       >
         <div style={{ display: 'flex', flexDirection: 'column', padding: '1rem 1.5rem', gap: '0' }}>
           {navLinks.map((link) => (
-            <a
+            <NavLink
               key={link.name}
-              href={link.href}
-              onClick={(e) => handleLinkClick(e, link.href)}
-              style={{
-                color: '#e8a060',
-                fontSize: '13px',
-                fontWeight: 600,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                textDecoration: 'none',
-                padding: '12px 0',
-                borderBottom: '1px solid rgba(255,255,255,0.08)',
-              }}
+              to={link.to}
+              onClick={() => setIsMobileMenuOpen(false)}
+              style={{ color: '#e8a060', fontSize: '13px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', textDecoration: 'none', padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.08)' }}
             >
               {link.name}
-            </a>
+            </NavLink>
           ))}
         </div>
       </div>
